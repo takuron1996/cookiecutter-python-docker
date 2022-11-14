@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: {{cookiecutter.container_name}}
+    build:
+      context: .
+      dockerfile: containers/python/Dockerfile
+    volumes:
+      - ./{{cookiecutter.workdir}}:/{{cookiecutter.workdir}}
+    tty: true

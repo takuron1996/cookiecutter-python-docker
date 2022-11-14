@@ -1,0 +1,8 @@
+{
+    "project_name": "template",
+    "workdir": "application",
+    "container_name": "app",
+    "author": "Taku Ikegami",
+    "version": "1.0.1",
+    "date": "{% now 'utc', '%Y/%m/%d' %}(Created: {% now 'utc', '%Y/%m/%d' %})"
+}

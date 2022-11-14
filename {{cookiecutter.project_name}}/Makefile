@@ -1,0 +1,53 @@
+SHELL = /bin/bash
+CONTAINER_NAME = {{cookiecutter.container_name}}
+APPLICATION = {{cookiecutter.workdir}}
+DOCKER = docker exec $(CONTAINER_NAME)
+PYLINT = $(DOCKER) poetry run pylint
+FORMAT = $(DOCKER) poetry run black
+LINTRCF	= pylintrc.txt
+LINTRST = pylintresult.txt
+RUN_FILE = {{cookiecutter.project_name}}/example.py
+TEST = tests
+COVERAGE = $(APPLICATION)/htmlcov
+PYCS = $(shell find . -type d -name .venv -prune -o -type d -name "__pycache__" -print)
+VENV = .venv
+EXCLUDE = -not -name .coveragerc -not -name .gitignore
+
+run: format
+	$(DOCKER) poetry run python $(RUN_FILE)
+
+test: format
+	$(DOCKER) poetry run pytest --cov -v --cov-report=html
+
+sh:
+	docker exec -it $(CONTAINER_NAME) /bin/sh
+
+up:
+	docker-compose up -d
+
+build:
+	docker-compose build
+
+down:
+	docker-compose down
+
+lint: format
+	@if [ ! -e $(APPLICATION)/$(LINTRCF) ]; then $(PYLINT) --generate-rcfile > $(APPLICATION)/$(LINTRCF) 2> /dev/null ; fi
+	@$(PYLINT) --rcfile=$(LINTRCF) `find . -name "*.py" | sed -e "s@/$(APPLICATION)@@"` > $(APPLICATION)/$(LINTRST); \
+	less $(APPLICATION)/$(LINTRST)
+
+format:
+	@$(FORMAT) .
+
+clean:
+	@if [ -d $(COVERAGE) ]; then echo "sudo rm -rf $(COVERAGE)"; sudo rm -rf $(COVERAGE); fi
+	@if [ -e $(APPLICATION)/$(LINTRST) ] ; then echo "rm -f $(APPLICATION)/$(LINTRST)" ; rm -f $(APPLICATION)/$(LINTRST) ; fi
+	@find . -maxdepth 1 $(EXCLUDE) -type f -name ".*" -exec rm {} ";" -exec echo rm -f {} ";"
+	@for each in ${PYCS} ; do echo "rm -rf $${each}" ; rm -rf $${each} ; done
+	@if [ -e $(APPLICATION)/poetry.lock ] ; then echo "rm -f $(APPLICATION)/poetry.lock" ; rm -f $(APPLICATION)/poetry.lock; fi
+
+install:
+	$(DOCKER) poetry install
+
+update:
+	$(DOCKER) poetry update
