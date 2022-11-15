@@ -13,6 +13,8 @@ PYCS = $(shell find . -type d -name .venv -prune -o -type d -name "__pycache__" 
 VENV = .venv
 EXCLUDE = -not -name .coveragerc -not -name .gitignore
 
+prepare: build	up	install
+
 run: format
 	$(DOCKER) poetry run python $(RUN_FILE)
 
