@@ -46,7 +46,6 @@ clean:
 	@if [ -e $(APPLICATION)/$(LINTRST) ] ; then echo "rm -f $(APPLICATION)/$(LINTRST)" ; rm -f $(APPLICATION)/$(LINTRST) ; fi
 	@find . -maxdepth 1 $(EXCLUDE) -type f -name ".*" -exec rm {} ";" -exec echo rm -f {} ";"
 	@for each in ${PYCS} ; do echo "rm -rf $${each}" ; rm -rf $${each} ; done
-	@if [ -e $(APPLICATION)/poetry.lock ] ; then echo "rm -f $(APPLICATION)/poetry.lock" ; rm -f $(APPLICATION)/poetry.lock; fi
 
 install:
 	$(DOCKER) poetry install
