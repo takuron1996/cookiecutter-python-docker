@@ -42,7 +42,7 @@ format:
 	@$(FORMAT) .
 
 clean:
-	@if [ -d $(COVERAGE) ]; then echo "sudo rm -rf $(COVERAGE)"; rm -rf $(COVERAGE); fi
+	@if [ -d $(COVERAGE) ]; then echo "rm -rf $(COVERAGE)"; rm -rf $(COVERAGE); fi
 	@if [ -e $(APPLICATION)/$(LINTRST) ] ; then echo "rm -f $(APPLICATION)/$(LINTRST)" ; rm -f $(APPLICATION)/$(LINTRST) ; fi
 	@find . -maxdepth 1 $(EXCLUDE) -type f -name ".*" -exec rm {} ";" -exec echo rm -f {} ";"
 	@for each in ${PYCS} ; do echo "rm -rf $${each}" ; rm -rf $${each} ; done
