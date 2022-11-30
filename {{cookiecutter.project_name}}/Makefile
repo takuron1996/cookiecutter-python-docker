@@ -3,7 +3,8 @@ CONTAINER_NAME = {{cookiecutter.container_name}}
 APPLICATION = {{cookiecutter.workdir}}
 DOCKER = docker exec $(CONTAINER_NAME)
 PYLINT = $(DOCKER) poetry run pylint
-FORMAT = $(DOCKER) poetry run black
+FORMAT_BLACK = $(DOCKER) poetry run black
+FORMAT_ISORT = $(DOCKER) poetry run isort
 LINTRCF	= pylintrc.txt
 LINTRST = pylintresult.txt
 RUN_FILE = {{cookiecutter.project_name}}/example.py
@@ -39,7 +40,8 @@ lint: format
 	less $(APPLICATION)/$(LINTRST)
 
 format:
-	@$(FORMAT) .
+	@$(FORMAT_BLACK) .
+	@$(FORMAT_ISORT) .
 
 clean:
 	@if [ -d $(COVERAGE) ]; then echo "rm -rf $(COVERAGE)"; rm -rf $(COVERAGE); fi
