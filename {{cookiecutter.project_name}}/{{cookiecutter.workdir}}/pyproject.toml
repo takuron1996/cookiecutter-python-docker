@@ -7,7 +7,7 @@ authors = ["{{cookiecutter.author}}"]
 [tool.poetry.dependencies]
 python = "^3.10.8"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "^7.2.0"
 pylint = "^2.15.5"
 pytest-cov = "^4.0.0"
