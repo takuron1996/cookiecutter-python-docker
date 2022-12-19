@@ -74,7 +74,7 @@ ignore_errors = true
 directory = "htmlcov"
 
 [tool.mypy]
-packages = ["disaster_messaging"]
+packages = ["{{cookiecutter.project_name}}"]
 ignore_missing_imports = true
 disallow_untyped_defs = true
 check_untyped_defs = true
