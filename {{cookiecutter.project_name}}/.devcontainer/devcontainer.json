@@ -1,0 +1,96 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.194.3/containers/docker-existing-docker-compose
+// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
+// 参考：
+//   https://zenn.dev/satococoa/articles/e4e013fd0c7e5c
+//   https://qiita.com/jjjkkkjjj/items/3b111e4768e740c5cd24
+{
+    "name": "Python with docker compose",
+    // Update the 'dockerComposeFile' list if you have more compose files or use different names.
+    // The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
+    "dockerComposeFile": [
+        "../docker-compose.yml"
+    ],
+    // The 'service' property is the name of the service for the container that VS Code should
+    // use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+    "service": "app",
+    // The optional 'workspaceFolder' property is the path VS Code should open by default when
+    // connected. This is typically a file mount in .devcontainer/docker-compose.yml
+    "workspaceFolder": "/application/",
+    // コンテナ接続時の設定を上書き
+    "settings": {
+        // デフォルトでbashのターミナルを起動させる
+        // https://qiita.com/tt4q/items/8a0e4c31f13279db0d65
+        "terminal.integrated.defaultProfile.linux": "bash",
+        // ↑のコマンドに指定出来るコマンドを列挙する
+        "terminal.integrated.profiles.linux": {
+            "bash": {
+                "path": "bash",
+                "icon": "terminal-bash"
+            },
+            "zsh": {
+                "path": "zsh"
+            },
+            "fish": {
+                "path": "fish"
+            },
+            "tmux": {
+                "path": "tmux",
+                "icon": "terminal-tmux"
+            },
+            "pwsh": {
+                "path": "pwsh",
+                "icon": "terminal-powershell"
+            }
+        },
+        "python.pythonPath": "/root/.cache/pypoetry/virtualenvs/disaster-messaging-hjPiGOLl-py3.11/bin"
+    },
+    // コンテナ起動時に自動で有効化されるVSCodeの拡張機能
+    "extensions": [
+        "abusaidm.html-snippets",
+        "angelo-breuer.clock",
+        "bierner.markdown-preview-github-styles",
+        "cschleiden.vscode-github-actions",
+        "eamodio.gitlens",
+        "fabiospampinato.vscode-diff",
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-rename-tag",
+        "GitHub.vscode-pull-request-github",
+        "Gruntfuggly.todo-tree",
+        "hbenl.vscode-test-explorer",
+        "ionutvmi.path-autocomplete",
+        "JoeBerria.statusbarerror",
+        "littlefoxteam.vscode-python-test-adapter",
+        "mhutchie.git-graph",
+        "mosapride.zenkaku",
+        "ms-azuretools.vscode-docker",
+        "MS-CEINTL.vscode-language-pack-ja",
+        "ms-python.isort",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-toolsai.jupyter-keymap",
+        "ms-toolsai.jupyter-renderers",
+        "ms-toolsai.vscode-jupyter-cell-tags",
+        "ms-toolsai.vscode-jupyter-slideshow",
+        "ms-vscode-remote.remote-containers",
+        "ms-vscode-remote.remote-ssh",
+        "ms-vscode-remote.remote-ssh-edit",
+        "ms-vscode-remote.remote-wsl",
+        "ms-vscode-remote.vscode-remote-extensionpack",
+        "ms-vscode.live-server",
+        "ms-vscode.makefile-tools",
+        "ms-vscode.remote-explorer",
+        "ms-vscode.test-adapter-converter",
+        "njpwerner.autodocstring",
+        "oderwat.indent-rainbow",
+        "PKief.material-icon-theme",
+        "sohamkamani.code-eol",
+        "streetsidesoftware.code-spell-checker",
+        "usernamehw.errorlens",
+        "withfig.fig"
+    ],
+    // 起動するサービス (空にしておくとdocker-compose.ymlにあるサービスが全て起動する)
+    "runServices": [],
+    "postCreateCommand": "poetry install"
+}
