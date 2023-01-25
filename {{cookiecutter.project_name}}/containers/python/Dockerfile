@@ -1,4 +1,5 @@
-FROM python:3
+ARG RUNTIME_VERSION="3.11.1"
+FROM python:${RUNTIME_VERSION}
 WORKDIR /{{cookiecutter.workdir}}
 ENV TZ="Asia/Tokyo"
 RUN echo $TZ > /etc/timezone
