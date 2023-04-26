@@ -16,6 +16,9 @@ black = "^22.10.0"
 isort = "^5.10.1"
 pdoc3 = "^0.10.0"
 mypy = "^0.991"
+pytest-clarity = "^1.0.1"
+pytest-randomly = "^3.12.0"
+pytest-mock = "^3.10.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -47,7 +50,7 @@ exclude = '''
 
 # pytest.iniの設定
 [tool.pytest.ini_options]
-addopts = "-ra -p no:cacheprovider --strict-config --strict-markers"
+addopts = "-ra -p no:cacheprovider --strict-config --strict-markers -vv --diff-width=60"
 
 # .coveragercの設定
 [tool.coverage.run]
