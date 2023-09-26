@@ -119,3 +119,4 @@ dmypy.json
 .pytype/
 
 .DS_Store
+lint_result.txt

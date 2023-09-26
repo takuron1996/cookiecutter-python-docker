@@ -1,8 +1,10 @@
 {
-    "project_name": "template",
+    "project_name": "python_template",
     "workdir": "application",
-    "container_name": "app",
-    "author": "Taku Ikegami",
+    "module": "template",
+    "container_name": "python_app",
+    "author": "takuron1996",
     "version": "1.0.1",
+    "description": "テンプレート",
     "date": "{% now 'utc', '%Y/%m/%d' %}(Created: {% now 'utc', '%Y/%m/%d' %})"
 }
