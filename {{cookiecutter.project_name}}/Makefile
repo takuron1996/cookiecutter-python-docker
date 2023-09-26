@@ -11,7 +11,7 @@ run:
 	$(POETRY_RUN) python $(RUN_FILE)
 
 test:
-	$(POETRY_RUN) pytest -ra -p no:cacheprovider --strict-config --strict-markers -vv --diff-width=60 --cov --cov-report=html
+	$(POETRY_RUN) pytest -n auto -ra -p no:cacheprovider --strict-config --strict-markers -vv --diff-symbols --cov --cov-report=html --gherkin-terminal-reporter
 
 up:
 	docker-compose up -d
@@ -23,7 +23,7 @@ down:
 	docker-compose down
 
 check:
-	@$(POETRY_RUN) ruff --fix --show-source --output-format text -o $(LINT_RESULT) .
+	-@$(POETRY_RUN) ruff --fix --show-source --output-format text -o $(LINT_RESULT) .
 	@less $(SOURCE_DIR)/$(LINT_RESULT)
 
 install:
@@ -33,7 +33,6 @@ update:
 	$(DOCKER) poetry update
 
 docs:
-	@$(POETRY_RUN) pdoc tests -o $(DOCS) -d google
 	@$(POETRY_RUN) pdoc {{cookiecutter.module}} -o $(DOCS) -d google
 
 
