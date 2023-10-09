@@ -1,7 +1,7 @@
 {
     "project_name": "python_template",
     "workdir": "application",
-    "module": "template",
+    "module": "module",
     "container_name": "python_app",
     "author": "takuron1996",
     "version": "1.0.1",
