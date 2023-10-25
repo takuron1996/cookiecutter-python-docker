@@ -23,6 +23,7 @@ down:
 	docker-compose down
 
 check:
+	@$(POETRY_RUN) black .
 	-@$(POETRY_RUN) ruff --fix --show-source --output-format text -o $(LINT_RESULT) .
 	@less $(SOURCE_DIR)/$(LINT_RESULT)
 
@@ -34,7 +35,6 @@ update:
 
 docs:
 	@$(POETRY_RUN) pdoc {{cookiecutter.module}} -o $(DOCS) -d google
-
 
 mypy:
 	$(POETRY_RUN) mypy --install-types --non-interactive
