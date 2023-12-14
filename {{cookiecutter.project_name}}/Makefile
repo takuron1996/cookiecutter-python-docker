@@ -11,7 +11,10 @@ run:
 	$(POETRY_RUN) python $(RUN_FILE)
 
 test:
-	$(POETRY_RUN) pytest -n auto -ra -p no:cacheprovider --strict-config --strict-markers -vv --diff-symbols --cov --cov-report=html --gherkin-terminal-reporter
+	$(POETRY_RUN) pytest -n auto -ra -p no:cacheprovider --strict-config --strict-markers -vv --diff-symbols --cov --cov-report=html
+	# xdistと--gherkin-terminal-reporterの相性が悪いみたいなので一時的にコメントアウト
+	# versionが修正され次第こちらのコマンドで実施予定
+	# $(POETRY_RUN) pytest -n auto -ra -p no:cacheprovider --strict-config --strict-markers -vv --diff-symbols --cov --cov-report=html --gherkin-terminal-reporter
 
 up:
 	docker-compose up -d
